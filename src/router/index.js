@@ -4,12 +4,22 @@ import upperCase from "@/components/upperCase";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: "/",
       name: "upperCase",
-      component: upperCase
+      component: upperCase,
+      meta: {
+        title: "转成大写"
+      }
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title;
+  next();
+});
+
+export default router;
