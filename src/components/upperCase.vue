@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <back></back>
     <h1>Convert Letters to UPPERCASE</h1>
     <textarea
       class="textarea"
@@ -37,6 +38,8 @@
 </template>
 
 <script>
+import back from "@/utils/backBtn/back";
+
 export default {
   name: "UpperCase",
   data() {
@@ -47,6 +50,9 @@ export default {
   },
   props: {
     msg: String,
+  },
+  components: {
+    back,
   },
   watch: {
     text() {
