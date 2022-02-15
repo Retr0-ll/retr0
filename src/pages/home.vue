@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <h1>Home</h1>
     <div
       class="tabs"
@@ -22,6 +22,15 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+h1 {
+  cursor: default;
+}
 .tabs {
   cursor: pointer;
   font-size: 1rem;

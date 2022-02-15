@@ -10,7 +10,8 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "build": "node build/build.js && scp -r dist/* root@152.136.180.43:/www"
+    "build": "node build/build.js && scp -r dist/* root@152.136.180.43:/www",
+    "push": "npm run build && scp -r dist/* root@152.136.180.43:/www"
   },
   "dependencies": {
     "vue": "^2.5.2",
