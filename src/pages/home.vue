@@ -1,11 +1,19 @@
 <template>
   <div class="wrapper">
     <h1>Home</h1>
-    <div
-      class="tabs"
-      @click="toUpperCase"
-    >
-      toUpperCase
+    <div class="tabs-wrapper">
+      <div
+        class="tabs"
+        @click="toUpperCase"
+      >
+        toUpperCase
+      </div>
+      <div
+        class="tabs"
+        @click="toDoList"
+      >
+        ToDo List
+      </div>
     </div>
   </div>
 </template>
@@ -17,6 +25,9 @@ export default {
     toUpperCase() {
       this.$router.push("uppercase");
     },
+    toDoList() {
+      this.$router.push("todolist");
+    },
   },
 };
 </script>
@@ -25,14 +36,33 @@ export default {
 .wrapper {
   height: 100%;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
 }
 h1 {
   cursor: default;
 }
+.tabs-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 25em;
+}
 .tabs {
+  display: flex;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.2em;
+  width: 8em;
+  height: 2em;
+  border-radius: 0.5em;
+  transition: all 0.5s;
+  margin: 0.5em 1em;
+  justify-content: center;
+  align-items: center;
+}
+.tabs:hover {
+  background-color: rgb(241, 241, 241);
+  color: #598bb9;
 }
 </style>

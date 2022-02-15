@@ -5,10 +5,14 @@ import App from "./App";
 import router from "./router";
 import VueClipboard from "vue-clipboard2";
 import showToast from "./utils/toast/index";
+import axios from "axios";
+import vueAxios from "vue-axios";
 
 Vue.config.productionTip = false;
 Vue.use(VueClipboard);
 Vue.use(showToast);
+Vue.prototype.axios = axios;
+Vue.use(vueAxios, axios);
 
 /* eslint-disable no-new */
 new Vue({

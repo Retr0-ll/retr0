@@ -7,6 +7,7 @@
       src="./assets/back.png"
       alt=""
       class="back-img"
+      draggable="false"
     >
   </div>
 </template>

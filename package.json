@@ -5,7 +5,7 @@
   "author": "retr0<1263111780@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 0.0.0.0",
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
@@ -14,7 +14,9 @@
     "push": "npm run build && scp -r dist/* root@152.136.180.43:/www"
   },
   "dependencies": {
+    "axios": "^0.26.0",
     "vue": "^2.5.2",
+    "vue-axios": "^3.4.1",
     "vue-clipboard2": "^0.3.3",
     "vue-router": "^3.0.1"
   },
