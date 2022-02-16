@@ -47,7 +47,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;

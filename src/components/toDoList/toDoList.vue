@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <back></back>
+    <back />
     <h1>ToDo List</h1>
     <h1>{{test}}</h1>
   </div>
@@ -26,9 +26,9 @@ export default {
   },
   methods: {
     async getTest() {
-      await this.axios.get("http://retr0home.club:8000/api").then((res) => {
-        this.test = res.data;
+      await this.axios.get("/todolist").then((res) => {
         console.log(res);
+        this.test = res.data;
       });
     },
   },
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="less" scoped>
 .wrapper {
   display: flex;
   flex-direction: column;

@@ -23,7 +23,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .back-wrapper {
   position: absolute;
   cursor: pointer;

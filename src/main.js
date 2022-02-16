@@ -14,6 +14,8 @@ Vue.use(showToast);
 Vue.prototype.axios = axios;
 Vue.use(vueAxios, axios);
 
+axios.defaults.baseURL = window.gurl.SERVICE_CONTEXT_PATH;
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

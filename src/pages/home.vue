@@ -32,7 +32,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .wrapper {
   height: 100%;
   display: flex;
