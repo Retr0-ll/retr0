@@ -3,6 +3,7 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
+import store from "./store";
 import VueClipboard from "vue-clipboard2";
 import showToast from "./utils/toast/index";
 import axios from "axios";
@@ -20,6 +21,7 @@ axios.defaults.baseURL = window.gurl.SERVICE_CONTEXT_PATH;
 new Vue({
   el: "#app",
   router,
+  store,
   components: { App },
   template: "<App/>"
 });

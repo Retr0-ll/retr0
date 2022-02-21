@@ -2,7 +2,6 @@
   <div class="wrapper">
     <back />
     <h1>ToDo List</h1>
-    <h1>{{test}}</h1>
     <div
       id="list"
       class="clearfix"
@@ -15,14 +14,16 @@
         <div class="list-title">{{item.title}}</div>
         <draggable
           class="draggable"
+          :class="{active:current===index}"
+          :data-index="index"
+          :move="onMoveCallback"
           :list="item.list"
+          v-bind="dragOptions"
+          @end="endDrag"
+          @start="drag = true"
           :group="item.title"
         >
-          <transition-group
-            @end="drag = false"
-            @start="drag = true"
-            :name="!drag ? 'flip-list' : null"
-          >
+          <transition-group :name="!drag ? 'flip-list' : null">
             <div
               class="draggable-item"
               v-for="element in item.list"
@@ -41,12 +42,16 @@
 import back from "@/utils/backBtn/back";
 import ListItem from "./listItem";
 import Draggable from "vuedraggable";
+import { mapGetters } from "vuex";
 
 export default {
   name: "UpperCase",
   data() {
     return {
       test: null,
+      current: "",
+      drag: false,
+      currentTask: "",
       listData: [
         {
           title: "进行中",
@@ -78,6 +83,15 @@ export default {
               id: 6,
               name: "测试6",
             },
+            {
+              id: 7,
+              name: "测试7",
+              desc: "",
+              timeStamp: "",
+              exp: {
+                tag: "",
+              },
+            },
           ],
         },
         {
@@ -93,11 +107,35 @@ export default {
     ListItem,
     Draggable,
   },
+  computed: {
+    ...mapGetters({
+      todoList: "getTodoData",
+    }),
+    dragOptions() {
+      return {
+        animation: 200,
+        group: "description",
+        disabled: false,
+        ghostClass: "ghost",
+      };
+    },
+  },
   watch: {},
   mounted() {
-    this.getTest();
+    console.log(this.todoList);
+    // this.getTest();
   },
   methods: {
+    endDrag() {
+      this.drag = false;
+
+      this.current = "";
+      this.$store.commit("ADD_TODOLIST_ITEM");
+    },
+    onMoveCallback(evt, originalEvent) {
+      this.currentTask = evt.draggedContext.element;
+      // this.current = +evt.to.dataset.index;
+    },
     async getTest() {
       await this.axios.get("/todolist").then((res) => {
         console.log(res);
@@ -143,7 +181,6 @@ h1 {
   }
   .draggable-item {
     margin-bottom: 0.5em;
-    cursor: pointer;
   }
   .flip-list-move {
     transition: transform 0.5s;
