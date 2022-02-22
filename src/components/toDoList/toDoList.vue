@@ -22,9 +22,13 @@
           v-bind="dragOptions"
           @end="endDrag"
           @start="startDrag"
+          @choose="chooseItem"
           :group="item.title"
         >
-          <transition-group :name="!drag ? 'flip-list' : null">
+          <transition-group
+            :name="!drag ? 'flip-list' : 'no'"
+            mode="out-in"
+          >
             <div
               class="draggable-item"
               v-for="element in item.list"
@@ -33,6 +37,7 @@
               <list-item
                 :objData="element"
                 @changeDrag="changeDrag"
+                @changeStatus="changeStatus"
               ></list-item>
             </div>
           </transition-group>
@@ -120,7 +125,6 @@ export default {
     dragOptions() {
       return {
         animation: 200,
-        group: "description",
         ghostClass: "ghost",
         delay: 200,
       };
@@ -128,7 +132,7 @@ export default {
   },
   watch: {},
   mounted() {
-    console.log(this.todoList);
+    console.log(this.listData);
     // this.getTest();
   },
   methods: {
@@ -144,6 +148,24 @@ export default {
         this.disabled = false;
       }
     },
+    changeStatus(obj) {
+      if (obj.status === "done") {
+        this.listData[0].list.map((ele, index) => {
+          if (ele.id === obj.id) {
+            this.listData[0].list.splice(index, 1);
+            this.listData[1].list.unshift(obj);
+          }
+        });
+      } else {
+        this.listData[1].list.map((ele, index) => {
+          if (ele.id === obj.id) {
+            this.listData[1].list.splice(index, 1);
+            this.listData[0].list.unshift(obj);
+          }
+        });
+      }
+      this.$store.commit("ADD_TODOLIST_ITEM");
+    },
     startDrag() {
       this.drag = true;
     },
@@ -152,6 +174,17 @@ export default {
 
       this.current = "";
       this.$store.commit("ADD_TODOLIST_ITEM");
+    },
+    chooseItem() {
+      navigator.vibrate =
+        navigator.vibrate ||
+        navigator.webkitVibrate ||
+        navigator.mozVibrate ||
+        navigator.msVibrate;
+
+      if (navigator.vibrate) {
+        navigator.vibrate(30);
+      }
     },
     onMoveCallback(evt, originalEvent) {
       this.currentTask = evt.draggedContext.element;
@@ -212,6 +245,16 @@ h1 {
   }
   .no-move {
     transition: transform 0s;
+  }
+  .flip-list-enter, .flip-list-leave-to
+/* .flip-list-leave-active for below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateX(24em);
+    transition: all 0.5s;
+  }
+  .flip-list-leave-active {
+    position: absolute;
+    transition: all 0.5s;
   }
 }
 </style>

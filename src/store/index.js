@@ -24,36 +24,70 @@ let state = {
       list: [
         {
           id: 1,
-          name: "测试1"
+          name: "测试1",
+          desc: "",
+          status: "",
+          editTime: "",
+          exp: {
+            tag: ""
+          }
         },
-
         {
           id: 2,
-          name: "测试2"
+          name: "测试2",
+          desc: "",
+          status: "",
+          editTime: "",
+          exp: {
+            tag: ""
+          }
         },
-
         {
           id: 3,
-          name: "测试3"
+          name: "测试3",
+          desc: "",
+          status: "",
+          editTime: "",
+          exp: {
+            tag: ""
+          }
         },
-
         {
           id: 4,
-          name: "测试4"
+          name: "测试4",
+          desc: "",
+          status: "",
+          editTime: "",
+          exp: {
+            tag: ""
+          }
         },
         {
           id: 5,
-          name: "测试5"
+          name: "测试5",
+          desc: "",
+          status: "",
+          editTime: "",
+          exp: {
+            tag: ""
+          }
         },
         {
           id: 6,
-          name: "测试6"
+          name: "测试6",
+          desc: "",
+          status: "",
+          editTime: "",
+          exp: {
+            tag: ""
+          }
         },
         {
           id: 7,
           name: "测试7",
           desc: "",
-          timeStamp: "",
+          status: "",
+          editTime: "",
           exp: {
             tag: ""
           }

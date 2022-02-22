@@ -12,12 +12,19 @@
         v-if="!editting"
         key="nromal"
       >
-        <span>{{objData.name}}</span>
         <div
-          class="btn"
-          @click="editItem"
-        >
-          编辑
+          class="check"
+          :class="objData.status === 'done'?'tick':'' "
+          @click="check"
+        ></div>
+        <div class="item-right">
+          <span :class="objData.status === 'done'?'done':'' ">{{objData.name}}</span>
+          <div
+            class="btn"
+            @click="editItem"
+          >
+            编辑
+          </div>
         </div>
       </div>
       <div
@@ -65,6 +72,14 @@ export default {
       this.$emit("changeDrag", false);
       this.$refs.item.style.height = "4em";
     },
+    check() {
+      if (this.objData.status !== "done") {
+        this.objData.status = "done";
+      } else {
+        this.objData.status = "undone";
+      }
+      this.$emit("changeStatus", this.objData);
+    },
   },
 };
 </script>
@@ -86,6 +101,29 @@ export default {
   justify-content: space-between;
   width: 100%;
   height: 4em;
+  .check {
+    box-sizing: border-box;
+    width: 1.2em;
+    height: 1.1em;
+    border-radius: 50%;
+    border: solid gray 2px;
+    cursor: pointer;
+  }
+  .tick {
+    background-color: gray;
+    background-image: url("../../assets/tick.png");
+    background-size: 100% 100%;
+  }
+  .item-right {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 1em;
+    width: 100%;
+    .done {
+      text-decoration: line-through;
+      color: #9c9c9c;
+    }
+  }
 }
 .item-edit {
   width: 100%;
