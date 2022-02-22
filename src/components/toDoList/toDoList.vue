@@ -17,10 +17,11 @@
           :class="{active:current===index}"
           :data-index="index"
           :move="onMoveCallback"
+          :disabled="disabled"
           :list="item.list"
           v-bind="dragOptions"
           @end="endDrag"
-          @start="drag = true"
+          @start="startDrag"
           :group="item.title"
         >
           <transition-group :name="!drag ? 'flip-list' : null">
@@ -29,7 +30,10 @@
               v-for="element in item.list"
               :key="element.id"
             >
-              <list-item :objData="element"></list-item>
+              <list-item
+                :objData="element"
+                @changeDrag="changeDrag"
+              ></list-item>
             </div>
           </transition-group>
         </draggable>
@@ -52,53 +56,55 @@ export default {
       current: "",
       drag: false,
       currentTask: "",
-      listData: [
-        {
-          title: "进行中",
-          list: [
-            {
-              id: 1,
-              name: "测试1",
-            },
+      disabled: false,
+      stakeDeep: 0,
+      // listData: [
+      //   {
+      //     title: "进行中",
+      //     list: [
+      //       {
+      //         id: 1,
+      //         name: "测试1",
+      //       },
 
-            {
-              id: 2,
-              name: "测试2",
-            },
+      //       {
+      //         id: 2,
+      //         name: "测试2",
+      //       },
 
-            {
-              id: 3,
-              name: "测试3",
-            },
+      //       {
+      //         id: 3,
+      //         name: "测试3",
+      //       },
 
-            {
-              id: 4,
-              name: "测试4",
-            },
-            {
-              id: 5,
-              name: "测试5",
-            },
-            {
-              id: 6,
-              name: "测试6",
-            },
-            {
-              id: 7,
-              name: "测试7",
-              desc: "",
-              timeStamp: "",
-              exp: {
-                tag: "",
-              },
-            },
-          ],
-        },
-        {
-          title: "已完成",
-          list: [],
-        },
-      ],
+      //       {
+      //         id: 4,
+      //         name: "测试4",
+      //       },
+      //       {
+      //         id: 5,
+      //         name: "测试5",
+      //       },
+      //       {
+      //         id: 6,
+      //         name: "测试6",
+      //       },
+      //       {
+      //         id: 7,
+      //         name: "测试7",
+      //         desc: "",
+      //         timeStamp: "",
+      //         exp: {
+      //           tag: "",
+      //         },
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     title: "已完成",
+      //     list: [],
+      //   },
+      // ],
     };
   },
   props: {},
@@ -109,14 +115,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      todoList: "getTodoData",
+      listData: "getTodoData",
     }),
     dragOptions() {
       return {
         animation: 200,
         group: "description",
-        disabled: false,
         ghostClass: "ghost",
+        delay: 200,
       };
     },
   },
@@ -126,6 +132,21 @@ export default {
     // this.getTest();
   },
   methods: {
+    changeDrag(val) {
+      if (val) {
+        this.stakeDeep += 1;
+      } else {
+        this.stakeDeep -= 1;
+      }
+      if (this.stakeDeep) {
+        this.disabled = true;
+      } else {
+        this.disabled = false;
+      }
+    },
+    startDrag() {
+      this.drag = true;
+    },
     endDrag() {
       this.drag = false;
 
@@ -158,6 +179,10 @@ export default {
 }
 h1 {
   cursor: default;
+}
+
+.sortable-chosen {
+  transform: scale(1.05, 1.05);
 }
 
 #list {

@@ -14,7 +14,7 @@
       >
         <span>{{objData.name}}</span>
         <div
-          class="edit"
+          class="btn"
           @click="editItem"
         >
           编辑
@@ -31,7 +31,7 @@
           :placeholder="objData.name"
         >
         <div
-          class="done"
+          class="btn"
           @click="editDone"
         >
           完成
@@ -57,10 +57,12 @@ export default {
   methods: {
     editItem() {
       this.editting = true;
+      this.$emit("changeDrag", true);
       this.$refs.item.style.height = "20em";
     },
     editDone() {
       this.editting = false;
+      this.$emit("changeDrag", false);
       this.$refs.item.style.height = "4em";
     },
   },
@@ -76,6 +78,7 @@ export default {
   height: 4em;
   background-color: #f5f5f5;
   transition: all 0.5s ease-out;
+  user-select: none;
 }
 .item-nromal {
   display: flex;
@@ -86,6 +89,9 @@ export default {
 }
 .item-edit {
   width: 100%;
+}
+.btn {
+  cursor: pointer;
 }
 .fade-enter-active,
 .fade-leave-active {
