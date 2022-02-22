@@ -63,53 +63,6 @@ export default {
       currentTask: "",
       disabled: false,
       stakeDeep: 0,
-      // listData: [
-      //   {
-      //     title: "进行中",
-      //     list: [
-      //       {
-      //         id: 1,
-      //         name: "测试1",
-      //       },
-
-      //       {
-      //         id: 2,
-      //         name: "测试2",
-      //       },
-
-      //       {
-      //         id: 3,
-      //         name: "测试3",
-      //       },
-
-      //       {
-      //         id: 4,
-      //         name: "测试4",
-      //       },
-      //       {
-      //         id: 5,
-      //         name: "测试5",
-      //       },
-      //       {
-      //         id: 6,
-      //         name: "测试6",
-      //       },
-      //       {
-      //         id: 7,
-      //         name: "测试7",
-      //         desc: "",
-      //         timeStamp: "",
-      //         exp: {
-      //           tag: "",
-      //         },
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     title: "已完成",
-      //     list: [],
-      //   },
-      // ],
     };
   },
   props: {},
@@ -127,6 +80,8 @@ export default {
         animation: 200,
         ghostClass: "ghost",
         delay: 200,
+        dragClass: "sortable-drag",
+        chosenClass: "sortable-chosen",
       };
     },
   },
@@ -214,6 +169,12 @@ h1 {
   cursor: default;
 }
 
+.ghost {
+  opacity: 0;
+}
+.sortable-drag {
+  transform: scale(1.05, 1.05);
+}
 .sortable-chosen {
   transform: scale(1.05, 1.05);
 }

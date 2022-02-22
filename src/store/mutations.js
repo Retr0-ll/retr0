@@ -7,12 +7,12 @@ const mutations = {
       todoStorage.setTodoList = state.todoData;
     } else {
       // 修改单个任务
-      if (data.item.id) {
+      if (data.id) {
         state.todoData.map(groupItem => {
           groupItem.list.map((item, index) => {
             // 从这个list中找到任务，修改
-            if (item.id === data.item.id) {
-              item = data.item;
+            if (item.id === data.id) {
+              item = data;
               groupItem.list.splice(index, 1, item);
             }
           });
@@ -21,9 +21,10 @@ const mutations = {
         todoStorage.setTodoList = state.todoData;
       } else {
         // 新增任务，data.index是任务分组下标，新增到对应分组
-        let list = state.todoData[data.index].list;
-        data.item.id = moment().valueOf();
-        list.push(data.item);
+        let list = state.todoData[0].list;
+        data.id = moment().valueOf();
+        data.status = "undone";
+        list.push(data);
       }
       todoStorage.setTodoList = state.todoData;
     }

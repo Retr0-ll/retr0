@@ -33,6 +33,7 @@
         key="edit"
       >
         <input
+          class="input"
           type="text"
           v-model="objData.name"
           :placeholder="objData.name"
@@ -71,6 +72,7 @@ export default {
       this.editting = false;
       this.$emit("changeDrag", false);
       this.$refs.item.style.height = "4em";
+      this.$store.commit("ADD_TODOLIST_ITEM", this.objDataj);
     },
     check() {
       if (this.objData.status !== "done") {
@@ -126,6 +128,24 @@ export default {
   }
 }
 .item-edit {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input {
+  margin: 1em 0;
+  background: transparent;
+  color: #2c3e50;
+  outline-style: none;
+  border: none;
+  border-bottom: solid gray 2px;
+  font-size: 1em;
+  font-weight: 400;
+  width: 50%;
+  transition: width 0.4s ease-in-out;
+}
+&:focus {
   width: 100%;
 }
 .btn {
