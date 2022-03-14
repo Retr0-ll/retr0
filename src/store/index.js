@@ -7,7 +7,7 @@ import { todoStorage } from "../common/storage";
 
 Vue.use(Vuex);
 
-let state = {
+const state = {
   // todoData: todoStorage.getTodoList || [
   //   {
   //     title: "进行中",

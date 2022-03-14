@@ -40,6 +40,12 @@
         >
         <div
           class="btn"
+          @click="delate"
+        >
+          删除
+        </div>
+        <div
+          class="btn"
           @click="editDone"
         >
           完成
@@ -72,7 +78,7 @@ export default {
       this.editting = false;
       this.$emit("changeDrag", false);
       this.$refs.item.style.height = "4em";
-      this.$store.commit("ADD_TODOLIST_ITEM", this.objDataj);
+      this.$store.commit("ADD_TODOLIST_ITEM", this.objData);
     },
     check() {
       if (this.objData.status !== "done") {
@@ -81,6 +87,12 @@ export default {
         this.objData.status = "undone";
       }
       this.$emit("changeStatus", this.objData);
+    },
+    delate() {
+      this.editting = false;
+      this.$emit("changeDrag", false);
+      this.$refs.item.style.height = "4em";
+      this.$store.commit("DELATE_ITEM", this.objData);
     },
   },
 };

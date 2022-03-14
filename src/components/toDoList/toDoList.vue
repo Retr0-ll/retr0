@@ -38,12 +38,18 @@
                 :objData="element"
                 @changeDrag="changeDrag"
                 @changeStatus="changeStatus"
+                ref="child"
               ></list-item>
             </div>
           </transition-group>
         </draggable>
       </div>
     </div>
+    <div
+      class="add-item"
+      v-show="!disabled"
+      @click="newItem"
+    >添加</div>
   </div>
 </template>
 
@@ -51,6 +57,7 @@
 import back from "@/utils/backBtn/back";
 import ListItem from "./listItem";
 import Draggable from "vuedraggable";
+import moment from "moment";
 import { mapGetters } from "vuex";
 
 export default {
@@ -91,6 +98,7 @@ export default {
     // this.getTest();
   },
   methods: {
+    // 改变可拖动状态，如果有在编辑的item就不可拖动
     changeDrag(val) {
       if (val) {
         this.stakeDeep += 1;
@@ -129,6 +137,7 @@ export default {
 
       this.current = "";
       this.$store.commit("ADD_TODOLIST_ITEM");
+      console.log(this.listData);
     },
     chooseItem() {
       navigator.vibrate =
@@ -146,10 +155,31 @@ export default {
       // this.current = +evt.to.dataset.index;
     },
     async getTest() {
-      await this.axios.get("/todolist").then((res) => {
+      await this.axios.get("/get-task-list").then((res) => {
         console.log(res);
         this.test = res.data;
       });
+    },
+    // 添加item
+    newItem() {
+      let obj = {
+        id: 0,
+        name: "",
+        desc: "",
+        status: "",
+        editTime: "",
+        exp: {
+          tag: "",
+        },
+      };
+      obj.id = moment().valueOf();
+      obj.status = "undone";
+      this.listData[0].list.unshift(obj);
+      setTimeout(() => {
+        console.log(this.$refs.child);
+        const n = this.$refs.child.length - 1;
+        this.$refs.child[n].editItem();
+      }, 100);
     },
   },
 };
@@ -161,9 +191,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
-  overflow-x: auto;
+  overflow: auto;
 }
 h1 {
   cursor: default;
@@ -180,10 +210,12 @@ h1 {
 }
 
 #list {
+  flex: 1;
   height: 100%;
   width: 100%;
   max-width: 24em;
   padding: 2em 0;
+  position: relative;
   .list-group {
     width: 100%;
     height: 100%;
@@ -217,5 +249,15 @@ h1 {
     position: absolute;
     transition: all 0.5s;
   }
+}
+.add-item {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  width: 4em;
+  height: 4em;
+  background-color: aquamarine;
+  border-radius: 50%;
+  cursor: pointer;
 }
 </style>
