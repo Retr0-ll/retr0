@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <back></back>
-    <h1><span>x</span> to max(<span>x</span>px, <span>x</span>PX)</h1>
+    <h1><span>x</span>px to max(<span>x</span>px, <span>x</span>PX)</h1>
     <textarea
       class="textarea"
       name="textone"
@@ -44,8 +44,8 @@ export default {
   name: "UpperCase",
   data() {
     return {
-      text: null,
-      res: null,
+      text: '',
+      res: '',
     };
   },
   props: {
@@ -61,11 +61,31 @@ export default {
   },
   methods: {
     handleText() {
-      if(Number(this.text) >= 0) {
-        this.res = `max(${this.text}px, ${this.text}PX)` ;
-      } else {
-        this.res = `min(${this.text}px, ${this.text}PX)` ; 
+      const patt=/[0-9]+px/g;
+
+      this.res = this.text.split('');
+
+      const pxArr = []
+
+      while (true) {
+        let result=patt.exec(this.text);
+        if (result == null) break;
+        pxArr.push(result);
       }
+
+      console.log(pxArr);
+
+      while(pxArr.length) {
+        const pxItem = pxArr.pop();
+        
+        if(pxItem.index && this.res[pxItem.index - 1] === '-') {
+          this.res.splice(pxItem.index - 1, pxItem[0].length + 1, `min(${pxItem[0]}, ${pxItem[0].replace('px', 'PX')})`)
+        } else {
+          this.res.splice(pxItem.index, pxItem[0].length, `max(${pxItem[0]}, ${pxItem[0].replace('px', 'PX')})`)
+        }
+      }
+
+      this.res = this.res.join('');
       
       document.getElementById("texttwo").value = this.res;
     },
