@@ -10,9 +10,15 @@
       </div>
       <div
         class="tabs"
-        @click="toDoList"
+        @click="px2PX"
       >
         ToDo List
+      </div>
+      <div
+        class="tabs"
+        @click="px2PX"
+      >
+        px2PX
       </div>
     </div>
   </div>
@@ -27,6 +33,9 @@ export default {
     },
     toDoList() {
       this.$router.push("todolist");
+    },
+    px2PX() {
+      this.$router.push("px2PX");
     },
   },
 };
