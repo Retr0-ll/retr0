@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <back></back>
-    <h1>Convert px to max(px, PX)</h1>
+    <h1><span>x</span> to max(<span>x</span>px, <span>x</span>PX)</h1>
     <textarea
       class="textarea"
       name="textone"
@@ -100,6 +100,10 @@ export default {
 }
 h1 {
   cursor: default;
+
+  span {
+    font-family: 'Times New Roman', Times, serif;
+  }
 }
 .textarea {
   border: 0;
