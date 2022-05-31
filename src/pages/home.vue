@@ -10,7 +10,7 @@
       </div>
       <div
         class="tabs"
-        @click="px2PX"
+        @click="toDoList"
       >
         ToDo List
       </div>
