@@ -27,6 +27,7 @@ const mutations = {
       }
       todoStorage.setTodoList = state.todoData;
     }
+    window.dispatchEvent(new CustomEvent("uploadData"));
   },
   DELATE_ITEM(state, data) {
     if (data) {
@@ -41,6 +42,7 @@ const mutations = {
       });
       todoStorage.setTodoList = state.todoData;
     }
+    window.dispatchEvent(new CustomEvent("uploadData"));
   }
 };
 

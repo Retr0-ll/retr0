@@ -21,6 +21,7 @@
         px2PX
       </div>
     </div>
+    <footer>备案号：京ICP备2022002953号</footer>
   </div>
 </template>
 
@@ -50,6 +51,10 @@ export default {
 }
 h1 {
   cursor: default;
+}
+footer {
+  position: fixed;
+  bottom: 0;
 }
 .tabs-wrapper {
   display: flex;

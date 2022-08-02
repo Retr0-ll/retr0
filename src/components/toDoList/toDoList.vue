@@ -93,11 +93,22 @@ export default {
     },
   },
   watch: {},
+  created() {
+    this.getList();
+    window.addEventListener("uploadData", () => {
+      console.log(111);
+      this.uploadDataHandler();
+    });
+  },
   mounted() {
     console.log(this.listData);
-    // this.getTest();
   },
   methods: {
+    uploadDataHandler() {
+      this.axios.post("/update-task-list", this.listData).then((res) => {
+        console.log("post", this.listData);
+      });
+    },
     // 改变可拖动状态，如果有在编辑的item就不可拖动
     changeDrag(val) {
       if (val) {
@@ -154,9 +165,9 @@ export default {
       this.currentTask = evt.draggedContext.element;
       // this.current = +evt.to.dataset.index;
     },
-    async getTest() {
+    async getList() {
       await this.axios.get("/get-task-list").then((res) => {
-        console.log(res);
+        console.log("test", res.data);
         this.test = res.data;
       });
     },
