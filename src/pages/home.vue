@@ -21,7 +21,9 @@
         px2PX
       </div>
     </div>
-    <footer>备案号：京ICP备2022002953号</footer>
+    <footer>
+      <a href="https://beian.miit.gov.cn/">备案号：京ICP备2022002953号</a>
+    </footer>
   </div>
 </template>
 
@@ -55,6 +57,10 @@ h1 {
 footer {
   position: fixed;
   bottom: 0;
+
+  a {
+    color: #2c3e50;
+  }
 }
 .tabs-wrapper {
   display: flex;
