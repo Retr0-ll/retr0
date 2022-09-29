@@ -85,4 +85,14 @@ footer {
   background-color: rgb(241, 241, 241);
   color: #598bb9;
 }
+
+.myicon {
+  color: green;
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    color: aqua;
+    cursor: pointer;
+  }
+}
 </style>
