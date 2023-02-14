@@ -20,6 +20,12 @@
       >
         px2PX
       </div>
+      <div
+        class="tabs"
+        @click="rem2px"
+      >
+        rem2px
+      </div>
     </div>
     <footer>
       <a href="https://beian.miit.gov.cn/">备案号：京ICP备2022002953号</a>
@@ -39,6 +45,9 @@ export default {
     },
     px2PX() {
       this.$router.push("px2PX");
+    },
+    rem2px() {
+      this.$router.push("rem2px");
     },
   },
 };

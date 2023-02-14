@@ -3,6 +3,7 @@ import Router from "vue-router";
 import home from "@/pages/home";
 import upperCase from "@/components/upperCase";
 import px2PX from "@/components/px2PX";
+import rem2px from "@/components/rem2px";
 import todolist from "@/components/toDoList/toDoList";
 
 Vue.use(Router);
@@ -39,6 +40,14 @@ const router = new Router({
       component: px2PX,
       meta: {
         title: "px2PX"
+      }
+    },
+    {
+      path: "/rem2px",
+      name: "rem2px",
+      component: rem2px,
+      meta: {
+        title: "rem2px"
       }
     }
   ]
